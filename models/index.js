@@ -7,3 +7,4 @@ mongoose.connect(process.env.MONGO_URI, {
 })
 
 module.exports.scores = require('./scores')
+module.exports.auth = require('./auth')
