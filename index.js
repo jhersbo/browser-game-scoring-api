@@ -13,7 +13,7 @@ app.use(express.json())
 app.use(cors())
 
 //controllers
-app.use('/scores', require('./controllers/scores'))
+app.use('/users', require('./controllers/users'))
 
 //landing
 app.get('/', (req, res)=>{

@@ -6,5 +6,4 @@ mongoose.connect(process.env.MONGO_URI, {
     useUnifiedTopology: true
 })
 
-module.exports.scores = require('./scores')
-module.exports.auth = require('./auth')
+module.exports.User = require('./users')
