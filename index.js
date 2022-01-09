@@ -11,7 +11,14 @@ app.use('/users', require('./controllers/users'))
 //landing
 app.get('/', (req, res)=>{
     res.json({
-        greeting: 'Homepage!'
+        greeting: 'Homepage!',
+        routes: {
+            returnAllUsers: 'get /',
+            createNewUser: 'post /',
+            returnOneUser: 'get /:username',
+            updateUserScore: 'put /:username',
+            deleteUser: 'delete /:username'
+        }
     })
 })
 app.get('*', (req, res)=>{
