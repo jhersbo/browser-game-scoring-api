@@ -1,39 +1,22 @@
 const router = require('express').Router()
 const db = require('../models/index')
-const users = require('../models/users')
-
-
-let seedData = [
-    {
-        "username": "jhersbo",
-        "password": "123",
-        "highScore": 15.4
-    },
-    {
-        "username": "poopmaster",
-        "password": "123",
-        "highScore": 69
-    }
-]
-router.get('/seed', (req, res)=>{
-    db.User.insertMany(seedData)
-    .then(()=>{
-        res.status(200).json({
-            msg: 'Seed Successful'
-        })
-    })
-    .catch((err)=>{
-        res.status(200).json({
-            error: `${err}`
-        })
-    })
-})
 
 //return all user profiles
 router.get('/', (req, res)=>{
     db.User.find()
     .then((users)=>{
         res.status(200).json({users})
+    })
+    .catch((err)=>{
+        res.status(400).json({err})
+    })
+})
+
+//create new user profile
+router.post('/', (req, res)=>{
+    db.User.create(req.body)
+    .then((user)=>{
+        res.status(200).json({user})
     })
     .catch((err)=>{
         res.status(400).json({err})
@@ -51,8 +34,32 @@ router.get('/:username', (req, res)=>{
     })
 })
 
+//update a user's score
+router.put('/:username', (req, res)=>{
+    db.User.findOneAndUpdate({username: req.params.username}, {score: req.body.score}, {new: true})
+    .then((user)=>{
+        res.status(200).json({user})
+    })
+    .catch((err)=>{
+        res.status(400).json({err})
+    })
+})
 
-
+//delete a user's profile
+router.delete('/:username', (req, res)=>{
+    db.User.findOneAndDelete({username: req.params.username})
+    .then(()=>{
+        res.status(200).json({
+            msg: 'Delete Successful'
+        })
+    })
+    .catch((err)=>{
+        res.status(400).json({
+            msg: 'Delete Failed',
+            error: err
+        })
+    })
+})
 
 //router export
 module.exports = router
