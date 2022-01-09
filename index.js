@@ -1,9 +1,11 @@
 const express = require('express')
 require('dotenv').config()
 const app = express()
+const cors = require('cors')
 
 //express settings
 app.use(express.json())
+app.use(cors())
 
 //controllers
 app.use('/users', require('./controllers/users'))
@@ -12,6 +14,7 @@ app.use('/users', require('./controllers/users'))
 app.get('/', (req, res)=>{
     res.json({
         greeting: 'Homepage!',
+        corsPolicy: 'This is CORS-enabled for all origins!',
         routes: {
             returnAllUsers: 'get /',
             createNewUser: 'post /',
