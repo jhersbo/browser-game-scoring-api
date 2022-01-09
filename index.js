@@ -1,16 +1,9 @@
 const express = require('express')
 require('dotenv').config()
 const app = express()
-const methodOverride = require('method-override')
-const cors = require('cors')
 
 //express settings
-app.set('view engine', 'jsx')
-app.engine('jsx', require('express-react-views').createEngine())
-app.use(express.static('public'))
-app.use(methodOverride('_method'))
 app.use(express.json())
-app.use(cors())
 
 //controllers
 app.use('/users', require('./controllers/users'))
