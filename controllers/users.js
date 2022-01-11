@@ -34,9 +34,9 @@ router.get('/:username', (req, res)=>{
     })
 })
 
-//update a user's score
+//update a user's high score
 router.put('/:username', (req, res)=>{
-    db.User.findOneAndUpdate({username: req.params.username}, {score: req.body.score}, {new: true})
+    db.User.findOneAndUpdate({username: req.params.username, score: {$gte: req.body.score}}, {score: req.body.score}, {new: true})
     .then((user)=>{
         res.status(200).json({user})
     })
