@@ -6,7 +6,7 @@ const cors = require('cors')
 //express settings
 app.use(express.json())
 app.use(cors({
-    origin: "https://jhersbo.github.io/marshes-melons/",
+    origin: "https://jhersbo.github.io",
     credentials: true,
 }))
 
