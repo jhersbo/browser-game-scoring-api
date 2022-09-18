@@ -5,7 +5,10 @@ const cors = require('cors')
 
 //express settings
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    origin: "https://jhersbo.github.io/marshes-melons/",
+    credentials: true,
+}))
 
 //controllers
 app.use('/users', require('./controllers/users'))
